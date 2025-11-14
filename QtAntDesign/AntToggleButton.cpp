@@ -29,7 +29,12 @@ AntToggleButton::AntToggleButton(QSize size, QWidget* parent)
 
 	connect(DesignSystem::instance(), &DesignSystem::themeChanged, this, [this]()
 		{
-			m_bgColor = DesignSystem::instance()->currentTheme().toggleButtonBgColor;
+            if (m_checked) {
+                m_bgColor = DesignSystem::instance()->primaryColor();
+            }
+            else {
+                m_bgColor = DesignSystem::instance()->currentTheme().toggleButtonBgColor;
+            }
 			m_toggleButtonColor = DesignSystem::instance()->currentTheme().toggleButtonColor;
 			m_textColor = DesignSystem::instance()->currentTheme().textColor;
 			update();
